@@ -391,8 +391,8 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
 
         //if (i % 1000 == 0 || (i < 1000 && i % 100 == 0)) {
         //if (i % 100 == 0) {
-        if ((iteration >= (iter_save + 10000) || iteration % 10000 == 0) ||
-            (iteration >= (iter_save + 1000) || iteration % 1000 == 0) && net.max_batches < 10000)
+        if ((iteration >= (iter_save + 100) || iteration % 100 == 0) ||
+            (iteration >= (iter_save + 10) || iteration % 10 == 0) && net.max_batches < 10000)
         {
             iter_save = iteration;
 #ifdef GPU
@@ -403,7 +403,7 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
             save_weights(net, buff);
         }
 
-        if (iteration >= (iter_save_last + 100) || (iteration % 100 == 0 && iteration > 1)) {
+        if (iteration >= (iter_save_last + 10) || (iteration % 10 == 0 && iteration > 1)) {
             iter_save_last = iteration;
 #ifdef GPU
             if (ngpus != 1) sync_nets(nets, ngpus, 0);
